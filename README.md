@@ -84,6 +84,8 @@ sharding:
   clusterRole: shardsvr
 replication:
   replSetName: sharda
+
+rs.initiate({_id : "sharda", members:[{ _id : 0, host: "mongo-shard-a-1:27017" }, { _id : 1, host: "mongo-shard-a-2:27017" }, { _id : 2, host: "mongo-shard-a-3:27017" }]})
 ```
 
 ## mondodb RS shard b node:
