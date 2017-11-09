@@ -1,7 +1,7 @@
 # Creacion de una imagen:
 gcloud compute --project=sysadmingalicia-185319 images create mongo-base --source-disk=mongo-base --source-disk-zone=europe-west2-a
 
-# Create instances experimento 1:
+# Create instances ReplicaSet:
 for i in {1..3}
 do
 gcloud compute instances create mongo-rep-$i --image mongo-base
@@ -39,3 +39,21 @@ for (var i = 0; i<50000; i++) {
 db.foo.insert({"numero": 1000*Math.rand()}); sleep(1);
 }
 
+
+######################################################################
+# SHARDING
+######################################################################
+
+# Creacion de config node
+```bash
+gcloud compute instances create mongo-config --image mongo-base
+gcloud compute instances create mongo-router --image mongo-base
+for i in {1..3}
+do
+gcloud compute instances create mongo-shard-a-$i --image mongo-base
+done
+for i in {1..3}
+do
+gcloud compute instances create mongo-shard-b-$i --image mongo-base
+done
+```
