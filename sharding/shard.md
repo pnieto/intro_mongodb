@@ -37,5 +37,6 @@ rs.initiate({_id : "shard2", members:[{ _id : 0, host: "mongo-shard-b-1:27017" }
 ## Configuracion del router, indicando cual/es son los config server:
 ```
 sharding:
-  configDB: <configReplSetName>/cfg1.example.net:27019,cfg2.example.net:27019
+  #configDB: <configReplSetName>/cfg1.example.net:27019,cfg2.example.net:27019
+  configDB: config
 ```
