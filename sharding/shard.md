@@ -19,9 +19,9 @@ sharding:
 sharding:
   clusterRole: shardsvr
 replication:
-  replSetName: sharda
+  replSetName: shard1
 
-rs.initiate({_id : "sharda", members:[{ _id : 0, host: "mongo-shard-a-1:27017" }, { _id : 1, host: "mongo-shard-a-2:27017" }, { _id : 2, host: "mongo-shard-a-3:27017" }]})
+rs.initiate({_id : "shard1", members:[{ _id : 0, host: "mongo-shard-a-1:27017" }, { _id : 1, host: "mongo-shard-a-2:27017" }, { _id : 2, host: "mongo-shard-a-3:27017" }]})
 ```
 
 ## mondodb RS shard 2 node:
@@ -29,7 +29,7 @@ rs.initiate({_id : "sharda", members:[{ _id : 0, host: "mongo-shard-a-1:27017" }
 sharding:
   clusterRole: shardsvr
 replication:
-  replSetName: shardb
+  replSetName: shard2
 
-rs.initiate({_id : "sharda", members:[{ _id : 0, host: "mongo-shard-b-1:27017" }, { _id : 1, host: "mongo-shard-b-2:27017" }, { _id : 2, host: "mongo-shard-b-3:27017" }]})
+rs.initiate({_id : "shard2", members:[{ _id : 0, host: "mongo-shard-b-1:27017" }, { _id : 1, host: "mongo-shard-b-2:27017" }, { _id : 2, host: "mongo-shard-b-3:27017" }]})
 ```
