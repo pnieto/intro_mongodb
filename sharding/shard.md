@@ -2,49 +2,52 @@
 
 # Creacion de config  RS node (Obligatorio desde la 3.4)
 ```bash
-gcloud compute instances create config --image mongo-base
+for i in {1..3}
+do
+gcloud compute instances create config-$i --image mongo-base
+done
 ```
 
 # Creacion de routers
 ```bash
-gcloud compute instances create router --image mongo-base
+for i in {1..3}
+do
+gcloud compute instances create router-$i --image mongo-base
+done
 ```
 
 # Creacion de los nodos Shard:
-gcloud compute instances create router --image mongo-base
-gcloud compute instances create shard-1 --image mongo-base
-gcloud compute instances create shard-2 --image mongo-base
+for i in {1..3}
+do
+gcloud compute instances create shard-$i --image mongo-base
+done
 ```
 
-## mongodb config node:
+## mongodb RS config:
 ```bash
 sharding:
   clusterRole: configsvr
+replication:
+  replSetName: rsconfig
+
+rs.initiate({_id : "rsconfig", members:[{ _id : 0, host: "config-1:27017" }, { _id : 1, host: "config-2:27017" }, { _id : 2, host: "config-3:27017" }]})
 ```
 
-## mondodb RS shard 1 node:
+## mondodb shard 1 node:
 ```bash
 sharding:
   clusterRole: shardsvr
-replication:
-  replSetName: shard1
-
-rs.initiate({_id : "shard1", members:[{ _id : 0, host: "mongo-shard-a-1:27017" }, { _id : 1, host: "mongo-shard-a-2:27017" }, { _id : 2, host: "mongo-shard-a-3:27017" }]})
 ```
 
-## mondodb RS shard 2 node:
+## mondodb shard 2 node:
 ```
 sharding:
   clusterRole: shardsvr
-replication:
-  replSetName: shard2
-
-rs.initiate({_id : "shard2", members:[{ _id : 0, host: "mongo-shard-b-1:27017" }, { _id : 1, host: "mongo-shard-b-2:27017" }, { _id : 2, host: "mongo-shard-b-3:27017" }]})
 ```
 
 ## Configuracion del router, indicando cual/es son los config server:
 ```
 sharding:
-  #configDB: <configReplSetName>/cfg1.example.net:27019,cfg2.example.net:27019
-  configDB: config
+  configDB: rsconfig/config-1:27019,config-2:27019,config-3:27019
+
 ```
