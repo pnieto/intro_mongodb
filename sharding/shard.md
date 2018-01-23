@@ -5,7 +5,7 @@
 gcloud compute instances create config --image mongo-base
 gcloud compute instances create router --image mongo-base
 gcloud compute instances create shard-1 --image mongo-base
-gcloud compute instances create shard-1 --image mongo-base
+gcloud compute instances create shard-2 --image mongo-base
 
 
 ## mongodb config node:
