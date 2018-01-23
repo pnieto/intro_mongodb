@@ -2,17 +2,11 @@
 
 # Creacion de config node
 ```bash
-gcloud compute instances create mongo-config --image mongo-base
-gcloud compute instances create mongo-router --image mongo-base
-for i in {1..3}
-do
-gcloud compute instances create mongo-shard-a-$i --image mongo-base
-done
-for i in {1..3}
-do
-gcloud compute instances create mongo-shard-b-$i --image mongo-base
-done
-```
+gcloud compute instances create config --image mongo-base
+gcloud compute instances create router --image mongo-base
+gcloud compute instances create shard-1 --image mongo-base
+gcloud compute instances create shard-1 --image mongo-base
+
 
 ## mongodb config node:
 ```bash
@@ -20,7 +14,7 @@ sharding:
   clusterRole: configsvr
 ```
 
-## mondodb RS shard a node:
+## mondodb RS shard 1 node:
 ```bash
 sharding:
   clusterRole: shardsvr
@@ -30,7 +24,7 @@ replication:
 rs.initiate({_id : "sharda", members:[{ _id : 0, host: "mongo-shard-a-1:27017" }, { _id : 1, host: "mongo-shard-a-2:27017" }, { _id : 2, host: "mongo-shard-a-3:27017" }]})
 ```
 
-## mondodb RS shard b node:
+## mondodb RS shard 2 node:
 ```
 sharding:
   clusterRole: shardsvr
