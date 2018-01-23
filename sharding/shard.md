@@ -17,6 +17,7 @@ done
 ```
 
 # Creacion de los nodos Shard:
+```bash
 for i in {1..3}
 do
 gcloud compute instances create shard-$i --image mongo-base
