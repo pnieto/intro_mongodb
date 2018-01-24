@@ -18,7 +18,7 @@ done
 
 ## Creacion de los nodos Shard:
 ```bash
-for i in {1..5}
+for i in {1..4}
 do
 gcloud compute instances create shard-$i --image mongo-base
 done
@@ -70,4 +70,24 @@ do
 gcscp mongod.conf-router router-$i:
 done
 
+sudo systemctl start mongos.service
+
 ```
+
+## Agregar los shard
+```
+sh.addShard("shard-1:27018")
+sh.addShard("shard-2:27018")
+```
+
+## Agregamos base de datos y creamos shard key
+```
+sh.enableSharding("sysadmingalicia")
+sh.shardCollection( "sysadmingalicia.foo", { "number" : "hashed" } )
+```
+
+## Agregamos datos a la base de datos
+for (var i = 0; i<50000; i++) {
+db.foo.insert({"numero": 1000*Math.rand()}); sleep(1);
+}
+
