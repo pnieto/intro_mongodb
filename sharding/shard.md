@@ -30,6 +30,12 @@ sharding:
   clusterRole: configsvr
 replication:
   replSetName: rsconfig
+
+for i in {1..3}
+do
+gcscp mongod.conf-config config-$i
+done
+
 rs.initiate(
   {
     _id: "rsconfig",
