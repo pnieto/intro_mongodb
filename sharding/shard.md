@@ -1,6 +1,6 @@
 # SHARDING (https://docs.mongodb.com/manual/tutorial/deploy-shard-cluster/)
 
-# Creacion de config  RS node (Obligatorio desde la 3.4)
+## Creacion de config  RS node (Obligatorio desde la 3.4)
 ```bash
 for i in {1..3}
 do
@@ -8,7 +8,7 @@ gcloud compute instances create config-$i --image mongo-base
 done
 ```
 
-# Creacion de routers
+## Creacion de routers
 ```bash
 for i in {1..3}
 do
@@ -16,9 +16,9 @@ gcloud compute instances create router-$i --image mongo-base
 done
 ```
 
-# Creacion de los nodos Shard:
+## Creacion de los nodos Shard:
 ```bash
-for i in {1..3}
+for i in {1..5}
 do
 gcloud compute instances create shard-$i --image mongo-base
 done
