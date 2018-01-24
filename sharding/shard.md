@@ -87,7 +87,8 @@ sh.shardCollection( "sysadmingalicia.foo", { "number" : "hashed" } )
 ```
 
 ## Agregamos datos a la base de datos
+```
 for (var i = 0; i<50000; i++) {
 db.foo.insert({"numero": 1000*Math.rand()}); sleep(1);
 }
-
+```
