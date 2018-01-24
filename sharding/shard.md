@@ -10,7 +10,7 @@ done
 
 ## Creacion de routers
 ```bash
-for i in {1..3}
+for i in {1..2}
 do
 gcloud compute instances create router-$i --image mongo-base
 done
@@ -53,6 +53,11 @@ rs.initiate(
 ```bash
 sharding:
   clusterRole: shardsvr
+
+for i in {1..5}
+do
+gcscp mongod.conf-shard shard-$i:
+done
 ```
 
 ## mondodb shard 2 node:
