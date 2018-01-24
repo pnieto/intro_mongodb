@@ -60,15 +60,14 @@ gcscp mongod.conf-shard shard-$i:
 done
 ```
 
-## mondodb shard 2 node:
-```
-sharding:
-  clusterRole: shardsvr
-```
-
 ## Configuracion del router, indicando cual/es son los config server:
 ```
 sharding:
   configDB: rsconfig/config-1:27019,config-2:27019,config-3:27019
+
+for i in {1..2}
+do
+gcscp mongod.conf-router router-$i:
+done
 
 ```
