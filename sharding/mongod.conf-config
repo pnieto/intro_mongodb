@@ -23,10 +23,6 @@ net:
   port: 27017
  # bindIp: 127.0.0.1
 
-sharding:
-  clusterRole: shardsvr
-replication:
-    replSetName: sharda
 #processManagement:
 
 #security:
@@ -42,3 +38,7 @@ replication:
 #auditLog:
 
 #snmp:
+sharding:
+  clusterRole: configsvr
+replication:
+  replSetName: rsconfig

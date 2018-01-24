@@ -30,8 +30,17 @@ sharding:
   clusterRole: configsvr
 replication:
   replSetName: rsconfig
-
-rs.initiate({_id : "rsconfig", members:[{ _id : 0, host: "config-1:27017" }, { _id : 1, host: "config-2:27017" }, { _id : 2, host: "config-3:27017" }]})
+rs.initiate(
+  {
+    _id: "rsconfig",
+    configsvr: true,
+    members: [
+      { _id : 0, host : "config-1:27019" },
+      { _id : 1, host : "config-2:27019" },
+      { _id : 2, host : "config-3:27019" }
+    ]
+  }
+)
 ```
 
 ## mondodb shard 1 node:
