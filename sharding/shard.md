@@ -33,7 +33,7 @@ replication:
 
 for i in {1..3}
 do
-gcscp mongod.conf-config config-$i
+gcscp mongod.conf-config config-$i:
 done
 
 rs.initiate(
