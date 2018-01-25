@@ -82,18 +82,21 @@ sh.addShard("shard-2:27018")
 
 ## Agregamos base de datos y creamos shard key
 ```
+use sysadmingalicia
 sh.enableSharding("sysadmingalicia")
 sh.shardCollection( "sysadmingalicia.foo", { "number" : "hashed" } )
 ```
 
 ## Agregamos datos a la base de datos
 ```
+use sysadmingalicia
 var before = new Date()
 for (var i = 0; i<50000; i++) {
-db.foo.insert({"number": 1000*Math.random()});
+db.foo.insert({"number": 10000000000*Math.random(),"data":"janjndandanasnsafsanfnaskjdnjaskndjsandjsnadjksndjasndjksandjksandkjasndnaldaksndlasndlasndlkasndasndlsandjsandlansdlasndl"});
 }
 var after = new Date()
 execution_mills = after - before
+
 ```
 
 ## Distribucion de los documentos
@@ -109,9 +112,10 @@ sh.addShard("shard-4:27018")
 
 ## Agregamos datos a la base de datos
 ```
+use sysadmingalicia
 var before = new Date()
 for (var i = 0; i<50000; i++) {
-db.foo.insert({"number": 1000*Math.random(),"data":"janjndandanasnsafsanfnaskjdnjaskndjsandjsnadjksndjasndjksandjksandkjasndnaldaksndlasndlasndlkasndasndlsandjsandlansdlasndl"});
+db.foo.insert({"number": 10000000000*Math.random(),"data":"janjndandanasnsafsanfnaskjdnjaskndjsandjsnadjksndjasndjksandjksandkjasndnaldaksndlasndlasndlkasndasndlsandjsandlansdlasndl"});
 }
 var after = new Date()
 execution_mills = after - before
@@ -121,6 +125,6 @@ execution_mills = after - before
 ## Eliminar 2 shards (volver a ejecutar para ver estado)
 ```
 db.adminCommand( { removeShard: "shard0003" } )
-db.adminCommand( { removeShard: "shard0003" } )
+db.adminCommand( { removeShard: "shard0002" } )
 ```
 
