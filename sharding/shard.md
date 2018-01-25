@@ -111,10 +111,11 @@ sh.addShard("shard-4:27018")
 ```
 var before = new Date()
 for (var i = 0; i<50000; i++) {
-db.foo.insert({"number": 1000*Math.random()});
+db.foo.insert({"number": 1000*Math.random(),"data":"janjndandanasnsafsanfnaskjdnjaskndjsandjsnadjksndjasndjksandjksandkjasndnaldaksndlasndlasndlkasndasndlsandjsandlansdlasndl"});
 }
 var after = new Date()
 execution_mills = after - before
+
 ```
 
 ## Eliminar 2 shards (volver a ejecutar para ver estado)
