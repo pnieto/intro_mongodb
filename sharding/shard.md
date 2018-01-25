@@ -54,7 +54,7 @@ rs.initiate(
 sharding:
   clusterRole: shardsvr
 
-for i in {1..5}
+for i in {1..4}
 do
 gcscp mongod.conf-shard shard-$i:
 done
@@ -88,7 +88,38 @@ sh.shardCollection( "sysadmingalicia.foo", { "number" : "hashed" } )
 
 ## Agregamos datos a la base de datos
 ```
+var before = new Date()
 for (var i = 0; i<50000; i++) {
-db.foo.insert({"numero": 1000*Math.rand()}); sleep(1);
+db.foo.insert({"number": 1000*Math.random()});
 }
+var after = new Date()
+execution_mills = after - before
 ```
+
+## Distribucion de los documentos
+```
+db.foo.getShardDistribution()
+```
+
+## Agregar 2 nuevos shard
+```
+sh.addShard("shard-3:27018")
+sh.addShard("shard-4:27018")
+```
+
+## Agregamos datos a la base de datos
+```
+var before = new Date()
+for (var i = 0; i<50000; i++) {
+db.foo.insert({"number": 1000*Math.random()});
+}
+var after = new Date()
+execution_mills = after - before
+```
+
+## Eliminar 2 shards (volver a ejecutar para ver estado)
+```
+db.adminCommand( { removeShard: "shard0003" } )
+db.adminCommand( { removeShard: "shard0003" } )
+```
+
